@@ -1,5 +1,4 @@
 ﻿using api.library.DAL.Models;
-using Lib_entidades.Modelos;
 
 namespace api.library.Repository.IRepository
 {

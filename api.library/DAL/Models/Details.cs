@@ -1,10 +1,9 @@
-﻿using api.library.DAL.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Lib_entidades.Modelos
+namespace api.library.DAL.Models
 {
-    public class Details
+    public class Details : AuditBase
     {
         [Key] public int Id_detail { get; set; }
         public DateTime Return_date { get; set; }
