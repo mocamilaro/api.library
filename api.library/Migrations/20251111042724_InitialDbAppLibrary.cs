@@ -6,110 +6,110 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.library.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDB : Migration
+    public partial class InitialDbAppLibrary : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Copias",
+                name: "Book",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Notas = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Disponible = table.Column<bool>(type: "bit", nullable: false),
-                    Libro = table.Column<int>(type: "int", nullable: false),
+                    Book_code = table.Column<int>(type: "int", nullable: false),
+                    Book_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Publication_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Copias", x => x.Id);
+                    table.PrimaryKey("PK_Book", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Detalles",
-                columns: table => new
-                {
-                    Id_detalle = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Fecha_entrega = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Prestamo = table.Column<int>(type: "int", nullable: false),
-                    Copia = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Detalles", x => x.Id_detalle);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Libros",
+                name: "Borrow",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cod_libro = table.Column<int>(type: "int", nullable: false),
-                    Nombre_libro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Fecha_publicacion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Autor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Borrow_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    User = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Libros", x => x.Id);
+                    table.PrimaryKey("PK_Borrow", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Personas",
+                name: "Copy",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cedula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Numero = table.Column<long>(type: "bigint", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<bool>(type: "bit", nullable: false),
+                    Book = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personas", x => x.Id);
+                    table.PrimaryKey("PK_Copy", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Prestamos",
+                name: "Detail",
+                columns: table => new
+                {
+                    Id_detail = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Return_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Borrow = table.Column<int>(type: "int", nullable: false),
+                    Copy = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Detail", x => x.Id_detail);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Person",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Fecha_prestamo = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Usuario = table.Column<int>(type: "int", nullable: false),
+                    Doc_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tel_number = table.Column<long>(type: "bigint", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prestamos", x => x.Id);
+                    table.PrimaryKey("PK_Person", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cod_usuario = table.Column<int>(type: "int", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Persona = table.Column<int>(type: "int", nullable: false),
+                    User_code = table.Column<int>(type: "int", nullable: false),
+                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Person = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
         }
 
@@ -117,22 +117,22 @@ namespace api.library.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Copias");
+                name: "Book");
 
             migrationBuilder.DropTable(
-                name: "Detalles");
+                name: "Borrow");
 
             migrationBuilder.DropTable(
-                name: "Libros");
+                name: "Copy");
 
             migrationBuilder.DropTable(
-                name: "Personas");
+                name: "Detail");
 
             migrationBuilder.DropTable(
-                name: "Prestamos");
+                name: "Person");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "User");
         }
     }
 }

@@ -5,12 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace api.library.DAL.Models
 {
-    public class Personas : AuditBase
+    public class Persons : AuditBase
     {
         [Required]
-        public string? Cedula { get; set; }
-        public string? Nombre { get; set; }
-        public long Numero { get; set; }
+        public string? Doc_id { get; set; }
+        public string? Name { get; set; }
+        public long Tel_number { get; set; }
 
     }
 }

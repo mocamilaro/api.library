@@ -22,29 +22,29 @@ namespace api.library.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Lib_entidades.Modelos.Detalles", b =>
+            modelBuilder.Entity("Lib_entidades.Modelos.Details", b =>
                 {
-                    b.Property<int>("Id_detalle")
+                    b.Property<int>("Id_detail")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_detalle"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_detail"));
 
-                    b.Property<int>("Copia")
+                    b.Property<int>("Borrow")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Fecha_entrega")
+                    b.Property<int>("Copy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Return_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Prestamo")
-                        .HasColumnType("int");
+                    b.HasKey("Id_detail");
 
-                    b.HasKey("Id_detalle");
-
-                    b.ToTable("Detalles");
+                    b.ToTable("Detail");
                 });
 
-            modelBuilder.Entity("api.library.DAL.Models.Copias", b =>
+            modelBuilder.Entity("api.library.DAL.Models.Books", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,58 +52,83 @@ namespace api.library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Book_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Book_code")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Disponible")
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Publication_date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("api.library.DAL.Models.Borrows", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Borrow_date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("User")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Borrow");
+                });
+
+            modelBuilder.Entity("api.library.DAL.Models.Copies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Available")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Libro")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Notas")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Copias");
-                });
-
-            modelBuilder.Entity("api.library.DAL.Models.Libros", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Autor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Cod_libro")
+                    b.Property<int>("Book")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Fecha_publicacion")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nombre_libro")
+                    b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Libros");
+                    b.ToTable("Copy");
                 });
 
-            modelBuilder.Entity("api.library.DAL.Models.Personas", b =>
+            modelBuilder.Entity("api.library.DAL.Models.Persons", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,28 +136,28 @@ namespace api.library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cedula")
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doc_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Numero")
+                    b.Property<long>("Tel_number")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Personas");
+                    b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("api.library.DAL.Models.Prestamos", b =>
+            modelBuilder.Entity("api.library.DAL.Models.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,49 +168,24 @@ namespace api.library.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Fecha_prestamo")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Usuario")
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Person")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_code")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prestamos");
-                });
-
-            modelBuilder.Entity("api.library.DAL.Models.Usuarios", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Cod_usuario")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Contraseña")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Correo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Persona")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuarios");
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }
