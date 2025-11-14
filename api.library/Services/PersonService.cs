@@ -16,9 +16,27 @@ namespace api.library.Services
             _mapper = mapper;
         }
 
-        public Task<bool> CreatePersonAsync(Persons person)
+        public async Task<PersonsDto> CreatePersonAsync(PersonsCreateDto createpersonDto)
         {
-            throw new NotImplementedException();
+            //Validar si la persona ya existe
+            var personExists = await _personRepository.PersonExistsByDocAsync(createpersonDto.Doc_id);
+            if (personExists)
+            {
+                throw new InvalidOperationException($"Ya existe una persona con el número de documento '{createpersonDto.Doc_id}'"); //La persona ya existe
+            }
+
+            var person = _mapper.Map<Persons>(createpersonDto); //Mapear el DTO a la entidad Persons
+
+            //Llamar al repositorio para crear la persona
+            var personCreated = await _personRepository.CreatePersonAsync(person);
+
+            if (!personCreated)
+            {
+                throw new Exception("Error al crear la persona"); //Error al crear la persona
+            }
+
+            //Mapear la entidad Persons a DTO y devolver el resultado
+            return _mapper.Map<PersonsDto>(person);
         }
 
         public Task<bool> DeletePersonAsync(int id)
@@ -26,9 +44,11 @@ namespace api.library.Services
             throw new NotImplementedException();
         }
 
-        public Task<PersonsDto> GetPersonByIdAsync(int id)
+        public async Task<PersonsDto> GetPersonByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var personDto = await _personRepository.GetPersonByIdAsync(id); //llamando el método desde la capa de repositorio
+
+            return _mapper.Map<PersonsDto>(personDto); //mapeando la lista de personas a DTOs
         }
 
         public async Task<ICollection<PersonsDto>> GetPersonsAsync()
@@ -37,20 +57,19 @@ namespace api.library.Services
             
             return _mapper.Map<ICollection<PersonsDto>>(persons); //mapeando la lista de personas a DTOs
 
-
         }
 
-        public Task<bool> PersonExistsByIdAsync(int id)
+        public async Task<bool> PersonExistsByDocAsync(string doc_id)
         {
-            throw new NotImplementedException();
+            return await _personRepository.PersonExistsByDocAsync(doc_id);
         }
 
-        public Task<bool> PersonExistsByNameAsync(string name)
+        public async Task<bool> PersonExistsByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            return await _personRepository.PersonExistsByNameAsync(name);
         }
 
-        public Task<bool> UpdatePersonAsync(Persons person)
+        public Task<PersonsDto> UpdatePersonAsync(PersonsDto person)
         {
             throw new NotImplementedException();
         }

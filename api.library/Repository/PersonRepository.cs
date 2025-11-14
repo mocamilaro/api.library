@@ -53,11 +53,11 @@ namespace api.library.Repository
                 .ToListAsync();
         }
 
-        public async Task<bool> PersonExistsByIdAsync(int id)
+        public async Task<bool> PersonExistsByDocAsync(string doc_id)
         {
             return await _context.Person.
                 AsNoTracking().
-                AnyAsync(p => p.Id == id); //lambda expression
+                AnyAsync(p => p.Doc_id == doc_id); //lambda expression
         }
 
         public async Task<bool> PersonExistsByNameAsync(string name)
