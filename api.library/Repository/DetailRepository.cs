@@ -57,9 +57,9 @@ namespace api.library.Repository
         {
             return await _context.Detail.
                 AsNoTracking().
-                AnyAsync(p => p.Id_detail == id); //lambda expression
+                AnyAsync(p => p.Id == id); //lambda expression
         }
-
+        
         public async Task<bool> UpdateDetailAsync(Details detail)
         {
             detail.ModifiedDate = DateTime.UtcNow;

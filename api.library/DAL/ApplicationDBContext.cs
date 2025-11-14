@@ -1,5 +1,4 @@
 ﻿using api.library.DAL.Models;
-using Lib_entidades.Modelos;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -7,8 +6,6 @@ namespace api.library.DAL
 {
     public class ApplicationDBContext : DbContext
     {
-
-
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
         }

@@ -12,8 +12,8 @@ using api.library.DAL;
 namespace api.library.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251111042724_InitialDbAppLibrary")]
-    partial class InitialDbAppLibrary
+    [Migration("20251114000509_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,28 +24,6 @@ namespace api.library.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Lib_entidades.Modelos.Details", b =>
-                {
-                    b.Property<int>("Id_detail")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_detail"));
-
-                    b.Property<int>("Borrow")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Copy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Return_date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id_detail");
-
-                    b.ToTable("Detail");
-                });
 
             modelBuilder.Entity("api.library.DAL.Models.Books", b =>
                 {
@@ -129,6 +107,34 @@ namespace api.library.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Copy");
+                });
+
+            modelBuilder.Entity("api.library.DAL.Models.Details", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Borrow")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Copy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Return_date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Detail");
                 });
 
             modelBuilder.Entity("api.library.DAL.Models.Persons", b =>

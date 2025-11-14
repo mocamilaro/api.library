@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.library.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDbAppLibrary : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,15 +66,17 @@ namespace api.library.Migrations
                 name: "Detail",
                 columns: table => new
                 {
-                    Id_detail = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Return_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Borrow = table.Column<int>(type: "int", nullable: false),
-                    Copy = table.Column<int>(type: "int", nullable: false)
+                    Copy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Detail", x => x.Id_detail);
+                    table.PrimaryKey("PK_Detail", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(

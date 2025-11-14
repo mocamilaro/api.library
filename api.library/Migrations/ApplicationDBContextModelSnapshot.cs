@@ -22,28 +22,6 @@ namespace api.library.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Lib_entidades.Modelos.Details", b =>
-                {
-                    b.Property<int>("Id_detail")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_detail"));
-
-                    b.Property<int>("Borrow")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Copy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Return_date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id_detail");
-
-                    b.ToTable("Detail");
-                });
-
             modelBuilder.Entity("api.library.DAL.Models.Books", b =>
                 {
                     b.Property<int>("Id")
@@ -126,6 +104,34 @@ namespace api.library.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Copy");
+                });
+
+            modelBuilder.Entity("api.library.DAL.Models.Details", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Borrow")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Copy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Return_date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Detail");
                 });
 
             modelBuilder.Entity("api.library.DAL.Models.Persons", b =>
