@@ -2,6 +2,7 @@ using api.library.DAL;
 using api.library.LibraryMapper;
 using api.library.Repository;
 using api.library.Repository.IRepository;
+using api.library.Services;
 using api.library.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,19 +17,19 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 builder.Services.AddAutoMapper(x => x.AddProfile<Mappers>());
 
 // Dependency injection for services
-builder.Services.AddScoped<IBookService, IBookService>();
-builder.Services.AddScoped<IBorrowService, IBorrowService>();
-builder.Services.AddScoped<ICopyService, ICopyService>();
-builder.Services.AddScoped<IDetailService, IDetailService>();
-builder.Services.AddScoped<IPersonService, IPersonService>();
-builder.Services.AddScoped<IUserService, IUserService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBorrowService, BorrowService>();
+builder.Services.AddScoped<ICopyService, CopyService>();
+builder.Services.AddScoped<IDetailService, DetailService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IUserService, UserService>();
 // Dependency injection for repositories
-builder.Services.AddScoped<IBookRepository, IBookRepository>();
-builder.Services.AddScoped<IBorrowRepository, IBorrowRepository>();
-builder.Services.AddScoped<ICopyRepository, ICopyRepository>();
-builder.Services.AddScoped<IDetailRepository, IDetailRepository>();
-builder.Services.AddScoped<IPersonRepository, IPersonRepository>();
-builder.Services.AddScoped<IUserRepository, IUserRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBorrowRepository, BorrowRepository>();
+builder.Services.AddScoped<ICopyRepository, CopyRepository>();
+builder.Services.AddScoped<IDetailRepository, DetailRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 

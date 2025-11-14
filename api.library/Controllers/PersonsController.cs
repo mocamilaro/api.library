@@ -16,6 +16,11 @@ namespace api.library.Controllers
             _personService = personService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
         public async Task<ActionResult<ICollection<PersonsDto>>> GetPersonsAsync()
         {
             var persons = await _personService.GetPersonsAsync();

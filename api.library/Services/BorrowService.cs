@@ -33,7 +33,7 @@ namespace api.library.Services
 
         public async Task<ICollection<BorrowsDto>> GetBorrowsAsync()
         {
-            var Borrows = _BorrowRepository.GetBorrowsAsync(); //llamando el método desde la capa de repositorio
+            var Borrows = await _BorrowRepository.GetBorrowsAsync(); //llamando el método desde la capa de repositorio
             
             return _mapper.Map<ICollection<BorrowsDto>>(Borrows); //mapeando la lista de Borrowas a DTOs
 

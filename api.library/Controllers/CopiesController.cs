@@ -16,6 +16,10 @@ namespace api.library.Controllers
             _CopiesService = CopiesService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<CopiesDto>>> GetCopiessAsync()
         {
             var Copiess = await _CopiesService.GetCopiesAsync();

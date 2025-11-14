@@ -16,6 +16,10 @@ namespace api.library.Controllers
             _BorrowService = BorrowService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<BorrowsDto>>> GetBorrowsAsync()
         {
             var Borrows = await _BorrowService.GetBorrowsAsync();

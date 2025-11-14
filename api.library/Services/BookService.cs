@@ -33,7 +33,7 @@ namespace api.library.Services
 
         public async Task<ICollection<BooksDto>> GetBooksAsync()
         {
-            var Books = _BookRepository.GetBooksAsync(); //llamando el método desde la capa de repositorio
+            var Books = await _BookRepository.GetBooksAsync(); //llamando el método desde la capa de repositorio
             
             return _mapper.Map<ICollection<BooksDto>>(Books); //mapeando la lista de Bookas a DTOs
 

@@ -16,6 +16,10 @@ namespace api.library.Controllers
             _DetailsService = DetailsService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<DetailsDto>>> GetDetailssAsync()
         {
             var Detailss = await _DetailsService.GetDetailsAsync();

@@ -16,6 +16,10 @@ namespace api.library.Controllers
             _UserService = UserService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<UsersDto>>> GetUsersAsync()
         {
             var Users = await _UserService.GetUsersAsync();

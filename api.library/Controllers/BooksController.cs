@@ -16,6 +16,10 @@ namespace api.library.Controllers
             _BookService = BookService;
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ICollection<BooksDto>>> GetBooksAsync()
         {
             var Books = await _BookService.GetBooksAsync();

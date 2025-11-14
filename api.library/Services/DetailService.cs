@@ -33,7 +33,7 @@ namespace api.library.Services
 
         public async Task<ICollection<DetailsDto>> GetDetailsAsync()
         {
-            var Details = _DetailRepository.GetDetailsAsync(); //llamando el método desde la capa de repositorio
+            var Details = await _DetailRepository.GetDetailsAsync(); //llamando el método desde la capa de repositorio
             
             return _mapper.Map<ICollection<DetailsDto>>(Details); //mapeando la lista de Detailas a DTOs
 

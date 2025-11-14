@@ -33,7 +33,7 @@ namespace api.library.Services
 
         public async Task<ICollection<UsersDto>> GetUsersAsync()
         {
-            var Users = _UserRepository.GetUsersAsync(); //llamando el método desde la capa de repositorio
+            var Users = await _UserRepository.GetUsersAsync(); //llamando el método desde la capa de repositorio
             
             return _mapper.Map<ICollection<UsersDto>>(Users); //mapeando la lista de Useras a DTOs
 

@@ -33,7 +33,7 @@ namespace api.library.Services
 
         public async Task<ICollection<CopiesDto>> GetCopysAsync()
         {
-            var Copys = _CopyRepository.GetCopiesAsync(); //llamando el método desde la capa de repositorio
+            var Copys = await _CopyRepository.GetCopiesAsync(); //llamando el método desde la capa de repositorio
             
             return _mapper.Map<ICollection<CopiesDto>>(Copys); //mapeando la lista de Copyas a DTOs
 
