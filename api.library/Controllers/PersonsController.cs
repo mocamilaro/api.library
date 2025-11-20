@@ -28,7 +28,7 @@ namespace api.library.Controllers
             return Ok(personsDto); //http 200 con la lista de personas
         }
 
-        [HttpGet("{id:int}", Name = "GetPersonByIdAsync")]
+        [HttpGet("{id:int}", Name = "GetPersonAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -59,8 +59,8 @@ namespace api.library.Controllers
                 var createdPerson = await _personService.CreatePersonAsync(personsCreateDto);
                 // Retorna un estado 201 Created con la ubicación del nuevo recurso
                 
-                return CreatedAtRoute("GetPersonByIdAsync", //1er parámetro: nombre de la ruta
-                    new { id = createdPerson.Doc_id },          //2do parámetro: valores de los parámetros de la ruta
+                return CreatedAtRoute("GetPersonAsync", //1er parámetro: nombre de la ruta
+                    new { id = createdPerson.Id },          //2do parámetro: valores de los parámetros de la ruta
                     createdPerson);                         //3er parámetro: el objeto creado
             }
 
